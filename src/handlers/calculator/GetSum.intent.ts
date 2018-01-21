@@ -3,7 +3,7 @@ import { ISnipsIntent } from '../../interfaces/ISnipsIntent';
 import { AwsSpeaker } from '../../speakers/Aws.speaker';
 import { CalculatorHelper } from './Calculator.helper';
 
-export class GetProductIntent implements ISnipsIntent {
+export class GetSumIntent implements ISnipsIntent {
 
     private _logger: Log4js.Logger;
     private _payload: any;
@@ -26,7 +26,7 @@ export class GetProductIntent implements ISnipsIntent {
             this._speaker.Speak(e.message);
             return;
         }
-        const res = result[0] * result[1];
+        const res = result[0] + result[1];
         this._logger.info("Result is %s", res);
         this._speaker.Speak("Result is " + res);
     }

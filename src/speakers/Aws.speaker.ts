@@ -1,11 +1,19 @@
 import * as AWS from 'aws-sdk';
 import * as Speaker from 'speaker';
 import * as Stream from 'stream';
+import * as Log4js from 'log4js';
 import { ISpeaker } from '../interfaces/ISpeaker';
 
 export class AwsSpeaker implements ISpeaker {
+
+    private _speaker: Log4js.Logger;
     
+    constructor() {
+        this._speaker = Log4js.getLogger();
+    }
+
     public Speak(toSay: string): void {
+        this._speaker.debug("Speaker called with : \"%s\"", toSay);
         let params = {
             'Text': toSay,
             'OutputFormat': 'pcm',

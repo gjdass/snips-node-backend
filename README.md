@@ -1,9 +1,8 @@
 __Work in progress__
 
-This is just a start, code (I mean the 100 lines) is ugly as f**k, I'll iterate on it.
-
 # snips-node-handlers-api
-An API built to handle all kind of snips.ai requests
+
+[![Build Status](https://travis-ci.org/gjdass/snips-node-handlers-api.svg?branch=master)](https://travis-ci.org/gjdass/snips-node-handlers-api)
 
 ## Just a start
 The aim is to build a full featured and easy to code/understand API to work with [Snips.ai](https://snips.ai), an open source and __privacy compliant__ voice recognition system (everything happens locally).

@@ -1,0 +1,12 @@
+{
+    "applicationName": "starter-app-node-ts",
+    "version": "1.0.0",
+    "mode": "default",
+    "log4js": {
+        "enabled": true,
+        "profile": "default"
+    },
+    "snips": {
+        "address": "192.168.0.29:1883"
+    }
+}

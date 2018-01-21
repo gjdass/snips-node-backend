@@ -1,0 +1,9 @@
+{
+    "applicationName": "starter-app-node-ts",
+    "version": "1.0.0",
+    "mode": "debug",
+    "log4js": {
+        "enabled": true,
+        "profile": "default"
+    }
+}

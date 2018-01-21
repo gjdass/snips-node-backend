@@ -6,14 +6,14 @@ import { ISpeaker } from '../interfaces/ISpeaker';
 
 export class AwsSpeaker implements ISpeaker {
 
-    private _speaker: Log4js.Logger;
+    private _logger: Log4js.Logger;
     
     constructor() {
-        this._speaker = Log4js.getLogger();
+        this._logger = Log4js.getLogger();
     }
 
     public Speak(toSay: string): void {
-        this._speaker.debug("Speaker called with : \"%s\"", toSay);
+        this._logger.debug("Speaker called with : \"%s\"", toSay);
         let params = {
             'Text': toSay,
             'OutputFormat': 'pcm',
@@ -32,7 +32,7 @@ export class AwsSpeaker implements ISpeaker {
         });
         Polly.synthesizeSpeech(params, (err, data) => {
             if (err) {
-                console.log(err.code);
+                this._logger.error(err.code, " - ", err.message);
             } else if (data) {
                 if (data.AudioStream instanceof Buffer) {
                     // Initiate the source

@@ -1,18 +1,7 @@
-import * as Log4js from 'log4js';
-import { ISnipsIntent } from '../../interfaces/ISnipsIntent';
-import { AwsSpeaker } from '../../speakers/Aws.speaker';
 import { CalculatorHelper } from './Calculator.helper';
+import { BaseIntent } from '../Base.intent';
 
-export class GetSumIntent implements ISnipsIntent {
-
-    private _logger: Log4js.Logger;
-    private _payload: any;
-    private _speaker: AwsSpeaker;
-    
-    constructor() {
-        this._logger = Log4js.getLogger();
-        this._speaker = new AwsSpeaker();
-    }
+export class GetSumIntent extends BaseIntent {
 
     public Init(payload: any): void {
         this._payload = payload;

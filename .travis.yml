@@ -1,6 +1,6 @@
 language: node_js
 node_js:
   - "9"
-before_install: sudo apt-get install -y alsa-utils
+before_install: sudo apt-get install -y alsa-utils libasound2-dev
 install: npm install
 script: npm run build

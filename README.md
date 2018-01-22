@@ -7,6 +7,9 @@ __Work in progress__
 ## Just a start
 The aim is to build a full featured and easy to code/understand API to work with [Snips.ai](https://snips.ai), an open source and __privacy compliant__ voice recognition system (everything happens locally).
 
+## Quick demo
+[![Video thumbnail](https://i.ytimg.com/vi/lBsEgB8Cx1g/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLC2odg5P4hQ3QeSQm1g9n8A6CIPkQ)](https://youtu.be/lBsEgB8Cx1g)
+
 ## Quick start
 
 ```bash

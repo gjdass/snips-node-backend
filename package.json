@@ -37,8 +37,8 @@
   },
   "scripts": {
     "start": "cross-env nodemon dist/index.js",
-    "build": "tsc",
-    "watch": "tsc --watch",
+    "build": "rm -rf dist/ && tsc",
+    "watch": "rm -rf dist/ && tsc --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 }

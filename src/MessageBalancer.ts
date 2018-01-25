@@ -1,3 +1,4 @@
+import { VariousHandler } from './handlers/various/Various.handler';
 import { WikipediaHandler } from './handlers/wikipedia/Wikipedia.handler';
 import { CalculatorHandler } from './handlers/calculator/Calculator.handler';
 import * as Lodash from 'lodash';
@@ -9,7 +10,8 @@ export class MessageBalancer {
     private _logger: Log4js.Logger;
     private _handlers: { [bundleName: string]: ISnipsHandler } = {
         "gjdass:Calculator": new CalculatorHandler(),
-        "gjdass:Wikipedia": new WikipediaHandler()
+        "gjdass:Wikipedia": new WikipediaHandler(),
+        "gjdass:Various": new VariousHandler()
     };
 
     constructor() {

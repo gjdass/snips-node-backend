@@ -20,6 +20,9 @@ $ npm start # to run the app and restart it when 'watch' recompile it (nodemon)
 $ node dist/index.js # to run the app (won't restart when a change occurs)
 ```
 
+The assistant used in this project is [available here](https://cloud.gjdass.fr/index.php/s/CkPlTyrG3WXTrB9). It will be updated over time when the project will handle more and more requests.
+You can also of course build your own in your snips admin console.
+
 ## What you need
 
 * A Raspberry-pi, or a Linux machine, with raspbian/debian on it

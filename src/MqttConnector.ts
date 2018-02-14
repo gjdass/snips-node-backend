@@ -4,6 +4,8 @@ import * as Lodash from "lodash";
 import { MqttClient } from "mqtt";
 import { MessageBalancer } from "./MessageBalancer";
 import { TopicHelper } from './helpers/Topic.helper';
+import { Input } from "./models/Input";
+import { SoundsPlayer } from './SoundsPlayer';
 
 export class MqttConnector {
 
@@ -11,10 +13,12 @@ export class MqttConnector {
     private _client: MqttClient;
     private _address: string;
     private _messageBalancer: MessageBalancer;
+    private _speaker: SoundsPlayer;
 
     constructor() {
         this._logger = Log4js.getLogger();
         this._messageBalancer = new MessageBalancer();
+        this._speaker = new SoundsPlayer();
     }
 
     public Connect(address: string): void {
@@ -40,24 +44,27 @@ export class MqttConnector {
         });
         // when we receive a message on the queue
         this._client.on("message", (topic: string, payload: any) => {
-            // for each message from Snips, we gonna pass here once
-            const subject = TopicHelper.GetSubjectName(topic);
-            // we skip every message but intent
-            if (subject !== "intent") return;
-            const intentName = TopicHelper.GetIntentName(topic);
-            this._logger.debug(topic);
-            if (!intentName) {
-                this._logger.warn("No intent can be extract from the request, SKIPPING");
-                return;
-            }
-            this._logger.info("Received intent=%s", intentName);
-            this._messageBalancer.Balance(intentName, JSON.parse(payload));
-        });
-    }
+            // this is spamming the bus and we don't care
+            if (Lodash.endsWith(topic, "audioFrame")) return;
 
-    private GetSubjectFromTopic(topic: string): string {
-        const names = Lodash.split(topic, "/");
-        if (!names[1]) return null;
-        return names[1];
+            // for each message from Snips, we try to split the topic in order
+            // to understand what to to next
+            const input = new Input(topic);
+
+            // just to log every topic we pass on
+            this._logger.debug(topic);
+
+            // now we take action regarding what kind of message we got
+            switch(input.Subject) {
+                case "intent":
+                    // this is the user demands
+                    this._messageBalancer.Balance(input.Action, JSON.parse(payload));
+                    break;
+                case "asr":
+                    // this is telling us user is having interactions with the microphone
+                    this._speaker.Play(input.Action);
+                    break;
+            }
+        });
     }
 }

@@ -1,3 +1,4 @@
+import { RandomLimit } from './RandomLimit.intent';
 import { BaseHandler } from '../Base.handler';
 import { FlipACoinIntent } from './FlipACoin.intent';
 import { RollADieIntent } from './RollADie.intent';
@@ -8,7 +9,8 @@ export class VariousHandler extends BaseHandler {
         super();
         this._intents = {
             "FlipACoin": new FlipACoinIntent(),
-            "RollADie": new RollADieIntent()
+            "RollADie": new RollADieIntent(),
+            "RandomLimit": new RandomLimit()
         };
     }
 

@@ -17,7 +17,7 @@ export class AwsSpeaker implements ISpeaker {
         let params = {
             'Text': toSay,
             'OutputFormat': 'pcm',
-            'VoiceId': 'Joanna'
+            'VoiceId': 'Joanna' // Celine for french
         };
         // Create an Polly client
         const Polly = new AWS.Polly({

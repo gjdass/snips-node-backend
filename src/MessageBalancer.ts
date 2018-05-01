@@ -18,7 +18,7 @@ export class MessageBalancer {
         this._logger = Log4js.getLogger();
     }
 
-    public Balance(intentName: string, payload: any): void {
+    public Dispatch(intentName: string, payload: any): void {
         // at this point, intentName is like : <snips-user>:<handler>-<intent>
         const handlerName = this.GetHandlerName(intentName);
         const smallIntentName = this.GetIntentName(intentName);

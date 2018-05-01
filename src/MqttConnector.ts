@@ -6,6 +6,7 @@ import { MessageBalancer } from "./MessageBalancer";
 import { TopicHelper } from './helpers/Topic.helper';
 import { Input } from "./models/Input";
 import { SoundsPlayer } from './SoundsPlayer';
+import { MqttHelper } from "./helpers/Mqtt.helper";
 
 export class MqttConnector {
 
@@ -23,7 +24,7 @@ export class MqttConnector {
 
     public Connect(address: string): void {
         this._address = address;
-        this._client = Mqtt.connect("mqtt://" + address);
+        this._client = MqttHelper.GetClient(address);
         this.SetCallbacks();
     }
 
@@ -44,8 +45,12 @@ export class MqttConnector {
         });
         // when we receive a message on the queue
         this._client.on("message", (topic: string, payload: any) => {
+
             // this is spamming the bus and we don't care
             if (Lodash.endsWith(topic, "audioFrame")) return;
+
+            // we try to get the sessionId of the request
+            let payloadObj = JSON.parse(payload);
 
             // for each message from Snips, we try to split the topic in order
             // to understand what to to next
@@ -58,7 +63,7 @@ export class MqttConnector {
             switch(input.Subject) {
                 case "intent":
                     // this is the user demands
-                    this._messageBalancer.Balance(input.Action, JSON.parse(payload));
+                    this._messageBalancer.Dispatch(input.Action, payloadObj);
                     break;
                 case "asr":
                     // this is telling us user is having interactions with the microphone

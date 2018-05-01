@@ -7,10 +7,10 @@ export class SoundsPlayer {
 
     // open sound
     private _openSoundPath = path.join(__dirname, '..', 'sounds', 'open.mp3');
+    private _closeSoundPath = path.join(__dirname, '..', 'sounds', 'close.mp3');
     private _openSoundStream: fs.ReadStream;
 
     constructor() {
-        this._openSoundStream = fs.createReadStream(this._openSoundPath);
     }
 
     public Play(type: string) {
@@ -18,6 +18,11 @@ export class SoundsPlayer {
         const decoder = Lame.Decoder();
         switch(type) {
             case 'startListening':
+                this._openSoundStream = fs.createReadStream(this._openSoundPath);
+                this._openSoundStream.pipe(decoder).pipe(player);
+                break;
+            case 'textCaptured':
+                this._openSoundStream = fs.createReadStream(this._closeSoundPath);
                 this._openSoundStream.pipe(decoder).pipe(player);
                 break;
         }
